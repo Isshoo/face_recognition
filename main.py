@@ -50,7 +50,7 @@ def box_frame(frame):
     for top, right, bottom, left, name in face_detect(frame):
         cv2.rectangle(frame, (left, top), (right, bottom), (255, 0, 0), 1)
         cv2.putText(frame, name, (left, top - 10),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 1)
 
 
 def close_window():
