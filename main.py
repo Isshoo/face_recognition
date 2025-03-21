@@ -32,7 +32,7 @@ def face_detect(frame):
     for face_encoding, face_location in zip(face_encodings, face_locations):
         matches = face_recognition.compare_faces(
             known_faces_encodings, face_encoding)
-        name = "Unknown"
+        name = "Yaki tidak dikenali"
 
         if True in matches:
             matched_index = np.argmin(face_recognition.face_distance(
