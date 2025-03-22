@@ -23,18 +23,27 @@ face_dir = "known_faces"
 for person_name in os.listdir(face_dir):
     person_folder = os.path.join(face_dir, person_name)
 
-    if os.path.isdir(person_folder):  # Pastikan ini folder
+    if os.path.isdir(person_folder):  # Pastikan ini adalah folder
         for filename in os.listdir(person_folder):
+            # Abaikan file tersembunyi seperti .DS_Store
+            if filename.startswith('.'):
+                continue
+
             filepath = os.path.join(person_folder, filename)
 
-            # Baca gambar dan ambil encoding wajah
-            image = face_recognition.load_image_file(filepath)
-            encodings = face_recognition.face_encodings(image)
+            try:
+                image = face_recognition.load_image_file(filepath)
+                encodings = face_recognition.face_encodings(image)
 
-            if encodings:
-                known_faces_encodings.append(encodings[0])  # Simpan encoding
-                # Simpan nama berdasarkan folder
-                known_faces_names.append(person_name)
+                if encodings:
+                    known_faces_encodings.append(
+                        encodings[0])  # Simpan encoding
+                    # Gunakan nama folder sebagai nama orang
+                    known_faces_names.append(person_name)
+
+            except Exception as e:
+                print(f"❌ Gagal membaca {filename}: {e}")
+
 
 if not known_faces_encodings:
     print("⚠️ Tidak ada wajah yang dikenali! Semua wajah akan dianggap 'Unknown'.")
