@@ -1,5 +1,7 @@
 .venv
+palm_venv
 .DS_Store
 known_faces/*
+known_hands/*
 dataset_hands
 cnn_trainer.py
